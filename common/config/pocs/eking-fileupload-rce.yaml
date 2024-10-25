@@ -1,0 +1,28 @@
+id: eking-fileupload-rce
+
+info:
+  name: eking fileupload - Remote Code Execution
+  author: yichen
+  severity: critical
+  description: |
+    EKing-管理易 FileUpload.ihtm 接口处存在文件上传漏洞，未经身份验证的远程攻击者可利用此漏洞上传任意文件，在服务器端任意执行代码，写入后门，获取服务器权限，进而控制整个 web 服务器。
+  reference:
+    - https://blog.csdn.net/qq_41904294/article/details/140670800?spm=1001.2014.3001.5502
+  verified: true
+  max-request: 1
+  fofa-query: body="管理易"
+  tags: rce,upload
+
+
+http:
+- raw:
+  - |+
+    @timeout: 30s
+    GET /app/FileUpload.ihtm HTTP/1.1
+    Host: {{Hostname}}
+    User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+
+  matchers:
+    - type: dsl
+      dsl:
+        - contains(body,"ERROR") && status_code == 200

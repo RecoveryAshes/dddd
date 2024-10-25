@@ -1,0 +1,28 @@
+id: raisecom-fileupload-rce
+
+info:
+  name: raisecom fileupload - Remote Code Execution
+  author: yichen
+  severity: critical
+  description: |
+    路由器负责网络间的数据转发和地址转换,交换机用于局域网内设备的互联和数据交换,网桥连接不同网段实现互通,网卡提供有线或无线网络接口。防火墙则对网络流量进行监控和控制,保护网络安全。某某康达vpn，其接口list_base_config.php存在命令执行漏洞，攻击者可通过该漏洞获取系统权限。
+  reference:
+    - https://blog.csdn.net/LongL_GuYu/article/details/141257047
+  verified: true
+  max-request: 1
+  fofa-query: body="/images/raisecom/back.gif"
+  tags: rce,upload
+
+
+http:
+- raw:
+  - |+
+    @timeout: 30s
+    GET /vpn/list_base_config.php?type=mod&parts=base_config&template= HTTP/1.1
+    Host: {{Hostname}}
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36
+
+  matchers:
+    - type: dsl
+      dsl:
+        - status_code == 200

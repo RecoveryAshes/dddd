@@ -1,0 +1,26 @@
+id: nacos-derby-rce
+
+info:
+  name: Nacos-derby Remote Code Execution
+  author: yichen
+  severity: critical
+  description: |
+    由于Alibaba Nacos部分版本中derby数据库默认可以未授权访问，恶意攻击者利用此漏洞可以未授权执行SQL语句，最终导致任意代码执行。目前该漏洞PoC已在互联网上公开，鉴于该漏洞影响范围较大，建议尽快做好自查及防护。此漏洞允许未经身份验证的远程攻击者执行任意代码，可能导致数据泄露、服务中断或系统被完全控制。
+  reference:
+    - https://blog.csdn.net/qq_41904294/article/details/140555863?spm=1001.2014.3001.5502
+  verified: true
+  max-request: 1
+  fofa-query: title="nacos"
+  tags: tech,detect,nacos,rce
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v1/cs/ops/derby"
+      - "{{BaseURL}}/nacos/v1/cs/ops/derby"
+
+
+    matchers:
+      - type: status
+        status:
+          - 500

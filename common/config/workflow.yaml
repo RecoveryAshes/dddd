@@ -124,6 +124,7 @@ SPIP:
   type:
     - root
   pocs:
+    - wanhu-graph-include-sqli 
     - CNVD-2021-34273
     - wanhu-documentedit-sqli
     - wanhu-download-ftp-file-read
@@ -134,6 +135,7 @@ SPIP:
     - wanhu-teleconferenceservice-xxe
     - wanhu-wpsservlet-fileupload
     - CVD-2023-2425
+    - wanhu-receivefile-gd-sqli
 列目录:
   type:
     - root
@@ -351,6 +353,7 @@ NUUO-NVR:
   pocs:
     - nuuo-file-inclusion
     - nuuo-nvrmini2-rce
+    - NUUONVR-upload-FileUpload
 D-Link D-View8:
   type:
     - root
@@ -1083,6 +1086,7 @@ ezEIP:
     - root
   pocs:
     - ezeip-info-leakage
+    - WHezEIP-productlist-SQL
 ManageEngine-OpManager:
   type:
     - root
@@ -1335,6 +1339,7 @@ GeoServer:
     - CVE-2022-24816
     - geoserver-default-login
     - CVE-2023-25157
+    - geoserver-wfs-rce
 KubePi:
   type:
     - root
@@ -1346,6 +1351,7 @@ H3C-iMC:
     - root
   pocs:
     - h3c-imc-rce
+    - h3c-imc-rce2
 iXCache:
   type:
     - root
@@ -3499,6 +3505,7 @@ Microweber:
     - root
   pocs:
     - sanhui-smg-file-read
+    - sanhui-smg-debug-rce
 Travis-CI:
   type:
     - root
@@ -4297,6 +4304,9 @@ VMware-HCX:
     - yonyou-turbo-crm-help2-fileread
     - yonyou-turbo-crm-downloadfile-fileread
     - yonyou-u8-crm-solr-log-infoleak
+    - yonyou-u8-crm-exportdictionary-sqli
+    - U8CRM-relobjreportlist-objType-SQL
+    - U8CRM-relobjreportlist-ids-SQL
 用友-移动系统管理:
   type:
     - root
@@ -4617,6 +4627,7 @@ Yonyou-U8-Cloud:
     - yonyou-u8c-registerservlet-sqli
     - yonyou-u8-cloud-appletinvoke-cacheinvokeservlet-rce
     - yonyou-u8c-loginvideoservlet-rce
+    - yonyou-u8-cloud-BusinessRefAction-sqli
 RedisInsight:
   type:
     - root
@@ -4975,8 +4986,14 @@ VMware-VirtualCenter:
   type:
     - root
   pocs:
-    - ns-asg-file-read
-    - netentsec-ns-asg-rce
+    - NS-ASG-arbitrary-file-read
+    - NS-ASG-netentsec-rce
+    - NS-ASG-add_ikev2-sqli
+    - NS-ASG-protocol-index-sqli
+    - NS-ASG-list_ipAddressPolicy-sqli
+    - NS-ASG-add_postlogin-sqli
+    - NS-ASG-config_Anticrack-sqli
+    - NS-ASG-config_ISCGroupNoCache-sqli
 APACHE-Storm:
   type:
     - root
@@ -5029,6 +5046,7 @@ Yonyou-UFIDA-NC:
   type:
     - root
   pocs:
+    - yonyou-nc-psnImage-download-sql
     - CNVD-2021-30167
     - wooyun-2015-148227
     - yonyou-nc-accept-fileupload
@@ -5437,6 +5455,7 @@ TerraMaster-TOS:
     - root
   pocs:
     - CNVD-2020-63964
+    - huaxia-erp-xielou
 Elasticsearch:
   type:
     - root
@@ -5694,6 +5713,8 @@ TeslaMate:
     - ecology-info-leak
     - ecology-ifnewscheckoutbycurrentuser-dwr-sqli
     - ecology-dbconfigreader-info-leak
+    - weaver-ecologyv10-testConnByBasePassword-rce
+    - FW-E-Cology-CptInstock1Ajax-SQL
 Imgproxy:
   type:
     - root
@@ -5879,6 +5900,7 @@ ListSERV Maestro:
     - esafenet-getvalidateloginuserservice-xstream-deserialzation-rce
     - esafenet-checkclientservelt-xstream-deserialzation-rce
     - esafenet-cdg-dbajax-jdbc-rce
+    - esafenet-CDGAuthoriseTempletService1-sql
 MobSF:
   type:
     - root
@@ -6368,6 +6390,7 @@ Alibaba-Nacos:
     - nacos-version
     - nacos-jraftserver-deserialization-rce
     - springboot-env-all-check
+    - nacos-derby-rce
 向日葵:
   type:
     - root
@@ -6569,3 +6592,38 @@ Pfsense- product:
   pocs:
     - CVE-2021-41282
     - CVE-2022-31814
+金斗云HKMP:
+  type:
+    - root
+  pocs:
+    - HKMP-sql
+WookTeam:
+  type:
+    - root
+  pocs:
+    - wookteam-searchinfo-sql
+PePm:
+  type:
+    - root
+  pocs:
+    - pepm-cookie-rce
+EKing-管理易:
+  type:
+    - root
+  pocs:
+    - eking-fileupload-rce
+瑞斯康达智能网关:
+  type:
+    - root
+  pocs:
+    - raisecom-fileupload-rce
+九思oa:
+  type:
+    - root
+  pocs:
+    - jiusi-WebServiceProxy-xxe
+DPTECH-SSLVPN:
+  type:
+    - root
+  pocs:
+    - Dp-VPN-readFile-2024-10-11

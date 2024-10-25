@@ -15,6 +15,9 @@ ThinkPHP:
   - "/WebReport/ReportServer"
   - "/ReportServer"
   - "/webroot/decision/login"
+  - "/fr/"
+  - "/WebReport/"
+  - "/webroot/decision/"
 XXL-JOB:
   - "/xxl-job-admin/toLogin"
   - "/xxl-job/toLogin"
@@ -41,3 +44,6 @@ Tomcat-Login:
   - "/manager/html"
 Jenkins:
   - "/jenkins/login"
+金蝶云星空:
+  - "/k3cloud"
+  - "/K3Cloud"

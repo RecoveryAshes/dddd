@@ -12409,7 +12409,7 @@ HanWei-integrated business platform:
 H3C-SecPath-U200-M:
   - 'banner="H3C Firewall SecPath U200-M" || banner="H3C Series Firewall SecPath U200-M"'
 ezEIP:
-  - body="ezEIP"
+  - body="ezEIP" || header="ezEIP" || body="css/css_whir.css"
 Guangzhou shared software - company products:
   - 'body="src=\"/AAA/IPWeb/Scripts/Zngc-login-style.js\"" && body="src=\"/AAA/IPWeb/Scripts/ShowOperationResult.js\""'
 DELL-DCS2210:
@@ -16215,3 +16215,19 @@ cdnjs:
   - 'header="cdnjs.cloudflare.com/ajax/libs" || banner="cdnjs.cloudflare.com/ajax/libs" || body="cdnjs.cloudflare.com/ajax/libs"'
 MacOS:
   - 'banner="MacOS" || (server="Mac" && header!="couchdb" && header!="drupal" && header!="ReeCam IP Camera") || banner="Macintosh OS X" || (protocol="snmp" && banner="Darwin Kernel Version")'
+金斗云HKMP:
+  - 'body="金斗云 Copyright"'
+WookTeam:
+  - 'title="Wookteam"'
+PePm:
+  - 'body="/static/images/pepm/login_bg_pc.jpg"'
+EKing-管理易:
+  - 'body="『管理易』"'
+瑞斯康达智能网关:
+  - 'body="/images/raisecom/back.gif" && title=="Web user login"'
+九思oa:
+  - 'body="/jsoa/login.jsp"'
+正方移动信息服务管理平台:
+  - 'body="/zftal-mobile"'
+Qualitor Web:
+  - title="Qualitor Web"
